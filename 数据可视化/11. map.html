@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地图1</title>
+    <script src="js/echarts.js"></script>
+    <script src="js/china.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        // 图表的标题部分
+        title: {
+            //正标题的内容
+            text: '手机销售量',
+            // 副标题的内容
+            subtext: '纯属数据'
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {
+                    show: true,
+                    type: 'jpg'
+                },
+                dataView: {
+                    show: true,
+                    readOnly: true
+                }
+            }
+        },
+        tooltip: {
+            show: true,
+            trigger: "item" // item值：鼠标移动到对应的形状上才会出现提示
+        },
+        // 图例
+        legend: {
+            // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+            data: ['iphone 8']
+        },
+        //视觉映射组件 dataRange
+        visualMap: [
+            {
+                min: 0,
+                max: 1000,
+                left: 'left',
+                bottom: 'bottom',
+                text: ['最多', '最少'],
+                calculable: true,
+                inRange: {
+                    color: ['#e0ffff', '#006edd']
+                }
+            }
+        ],
+        // 地理坐标系 组件，用于地图的绘制
+        geo: {
+            map: 'china',
+            // 是否开启鼠标缩放和平移，默认值false
+            roam: false,
+            zoom: 1.23, //视觉缩放比例
+            itemStyle: {
+                normal: {
+                    borderColor: 'rgba(2,6,16,0.82)'
+                },
+                // 高亮显示的样式
+                emphasis: {
+                    areaColor: '#65daff',
+                    shadowColor: 'rgba(0,0,0,0.5)',
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowBlur: 20,
+                    borderWidth: 2
+                }
+            },
+            label: {
+                show: true
+            }
+        },
+        // 序列/系列
+        series: [
+            {
+                name: 'iphone 8', // 当前数据的名称
+                type: 'map', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+                geoIndex: 0,
+                data: [
+                    {name:"南海诸岛",value:0},
+                    {name: '北京', value: 234},
+                    {name: '天津', value: 532},
+                    {name: '上海', value: 134},
+                    {name: '重庆', value: 983},
+                    {name: '河北', value: 783},
+                    {name: '河南', value: 345},
+                    {name: '云南', value: 872},
+                    {name: '辽宁', value: 94},
+                    {name: '黑龙江', value: 342},
+                    {name: '湖南', value: 989},
+                    {name: '安徽', value: 767},
+                    {name: '山东', value: 675},
+                    {name: '新疆', value: 874},
+                    {name: '江苏', value: 874},
+                    {name: '浙江', value: 878},
+                    {name: '江西', value: 928},
+                    {name: '湖北', value: 44},
+                    {name: '广西', value: 448},
+                    {name: '甘肃', value: 887},
+                    {name: '山西', value: 983},
+                    {name: '内蒙古', value: 673},
+                    {name: '陕西', value: 563},
+                    {name: '吉林', value: 757},
+                    {name: '福建', value: 112},
+                    {name: '贵州', value: 473},
+                    {name: '广东', value: 647},
+                    {name: '青海', value: 838},
+                    {name: '西藏', value: 515},
+                    {name: '四川', value: 515},
+                    {name: '宁夏', value: 172},
+                    {name: '海南', value: 77},
+                    {name: '台湾', value: 837},
+                    {name: '香港', value: 677},
+                    {name: '澳门', value: 43}
+                ] // 需要展示的数据
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

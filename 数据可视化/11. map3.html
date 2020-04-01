@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>利用JSON文件完成地图的绘制</title>
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    //通过AJAX获取JSON文件中的信息
+    $.get('json/shenyang.json', function(shenyangData){
+        console.log(123);
+    //    向ECharts当中注册该地图
+        echarts.registerMap('shenyang', shenyangData);
+
+        var data = [
+            {name:'和平区',value:332},
+            {name:'沈河区', value: 234},
+            {name: '皇姑区', value: 532},
+            {name: '大东区', value: 134},
+            {name: '铁西区', value: 983},
+            {name: '浑南区', value: 783},
+            {name: '于洪区', value: 345},
+            {name: '沈北新区', value: 872},
+            {name: '苏家屯区', value: 94},
+            {name: '新民市', value: 342},
+            {name: '辽中区', value: 989},
+            {name: '康平县', value: 767},
+            {name: '法库县', value: 675}
+        ];
+
+        var geoCoordMap = {
+            '和平区':[123.4204,41.78997],
+            '沈河区':[123.45871,41.79625],
+            '皇姑区':[123.42527,41.82035],
+            '大东区':[123.46997,41.80539],
+            '铁西区':[123.37675,41.80269],
+            '浑南区':[123.457707,41.719450],
+            '于洪区':[123.30807,41.794],
+            '沈北新区':[123.52658,42.05297],
+            '苏家屯区':[123.34405,41.66475],
+            '新民市':[122.82867,41.99847],
+            '辽中区':[122.72659,41.51302],
+            '康平县':[123.35446,42.75081],
+            '法库县':[123.41214,42.50608]
+        };
+
+        var convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var geoCoord = geoCoordMap[data[i].name];
+                if (geoCoord) {
+                    res.push({
+                        name: data[i].name,
+                        value: geoCoord.concat(data[i].value)
+                    });
+                }
+            }
+            return res;
+        };
+
+        // 指定图表的配置项和数据
+        var option = {
+            backgroundColor: '#404a59',
+            // 图表的标题部分
+            title: {
+                //正标题的内容
+                text: '沈阳市iphone8销量',
+                // 副标题的内容
+                subtext: '就是个数据显示的'
+            },
+            toolbox: {
+                show: true,
+                feature: {}
+            },
+            tooltip: {
+                show: true,
+                trigger: "axis" // item值：鼠标移动到对应的形状上才会出现提示
+            },
+            // 图例
+            legend: {
+                // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+                data: ['iphone 8']
+            },
+            visualMap: [
+                {
+                    min: 0,
+                    max: 1000,
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['高', '低'],
+                    calculable: true,
+                    inRange: {
+                        color: ['#f1f8ff', '#ff212b']
+                    }
+                }
+            ],
+            // 地理坐标系
+            geo: {
+                map: 'shenyang',
+                // center: [123.429096,41.796767],
+                roam: false,
+                zoom: 1.23,
+                itemStyle: {
+                    normal: {
+                        areaColor: 'rgb(155,224,255)',
+                        borderColor: 'rgb(68,76,95)'
+                    },
+                    // 高亮显示的样式
+                    emphasis: {
+                        areaColor: '#65daff',
+                        shadowColor: 'rgba(0,0,0,0.5)',
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0,
+                        shadowBlur: 20,
+                        borderWidth: 2
+                    }
+                },
+                label: {
+                    show: true
+                }
+            },
+            // 序列/系列
+            series: [
+                {
+                    name: 'iphone 8', // 当前数据的名称
+                    type: 'scatter', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+                    coordinateSystem: 'geo',
+                    data: convertData(data), // 需要展示的数据
+                    symbolSize: 20,
+                    label: {
+                        formatter: '{b}',
+                        position: 'right',
+                    },
+                    itemStyle: {
+                        color: '#ff212b'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas的简单使用</title>
+</head>
+<body>
+<!--
+    基于像素的
+-->
+<!-- 创建canvas的标签 -->
+<canvas width="500px" height="600px">
+    canvas标签不被当前浏览器支持
+</canvas>
+
+<!-- 使用js代码完成图形的绘制 -->
+<script type="text/javascript">
+    // 获取DOM元素节点
+    // document.getElementById();
+    // document.getElementsByClassName();
+    // document.getElementsByTagName();
+    // document.getElementsByName();
+
+    //CSS选择器 #first  .first
+    // 获取画布元素
+    var canvasObj = document.querySelector("canvas"); // 首个匹配的元素
+    // document.querySelectorAll(); // 匹配的所有
+//    设置画图对象
+    var ctx = canvasObj.getContext("2d");
+
+//    调用对应的方法完成图形的绘制
+    ctx.beginPath();
+    // 设置路径的颜色
+    ctx.strokeStyle = "red";
+
+    ctx.fillStyle = "green";
+
+    var circle = {
+        x: 100,
+        y: 100,
+        r: 50
+    };
+
+    ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2, false);
+
+//    绘制
+    ctx.stroke();
+//    填充对应颜色
+    ctx.fill();
+</script>
+</body>
+</html>

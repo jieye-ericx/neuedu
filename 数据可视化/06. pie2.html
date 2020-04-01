@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饼环</title>
+    <script src="js/echarts.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        // 图表的标题部分
+        title: {
+            //正标题的内容
+            text: '网站的用户访问来源',
+            // 副标题的内容
+            subtext: '基本数据展示'
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {
+                    show: true
+                },
+                dataView: {
+                    show: true,
+                    readOnly: true
+                }
+            }
+        },
+        tooltip: {
+            show: true,
+            trigger: "item", // item值：鼠标移动到对应的形状上才会出现提示
+            //格式化数据的 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+            formatter:'{a} </br> {b} : {c} ({d}%)'
+        },
+        // 图例
+        legend: {
+            left: 'center',
+            orient: 'vertical',
+            // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        },
+        // 序列/系列
+        series: [
+            {
+                name: '访问来源', // 当前数据的名称
+                type: 'pie', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+                // 半径 : 支持绝对值的方式 px 百分比 , 支持单个数值表示，也支持数组形式的数值显示
+                radius: ['50%', '70%'],
+                // 圆心 : 同样支持两种方式设置
+                center: ['50%', '65%'],
+                // 是否启用放置标签重叠，默认开启，在标签拥挤重叠的情况下会挪动各个标签的位置，方式重叠
+                // 如果需要将所有标签放置在中心位置，可以将该值设置为false
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [
+                    {
+                        name: '直接访问',
+                        value: 335
+                    },
+                    {
+                        name: '邮件营销',
+                        value: 310
+                    },
+                    {
+                        name: '联盟广告',
+                        value: 234
+                    },
+                    {
+                        name: '视频广告',
+                        value: 210
+                    },
+                    {
+                        name: '搜索引擎',
+                        value: 1810
+                    }
+                ] // 需要展示的数据
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

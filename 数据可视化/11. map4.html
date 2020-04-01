@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>利用百度地图API完成地图的绘制</title>
+    <script src="js/echarts.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=q10g5t0sQcNwnm4V0VjTGibetmtnfe3b"></script>
+    <script src="js/bmap.min.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        // 图表的标题部分
+        title: {
+            //正标题的内容
+            text: '',
+            // 副标题的内容
+            subtext: ''
+        },
+        toolbox: {
+            show: true,
+            feature: {}
+        },
+        tooltip: {
+            show: true,
+            trigger: "axis" // item值：鼠标移动到对应的形状上才会出现提示
+        },
+        // 图例
+        legend: {
+            // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+            data: []
+        },
+        // 横坐标轴
+        xAxis: {
+            type: 'category', //表明当前坐标轴的类型  默认横坐标轴就是类目
+            data: []
+        },
+        // 纵坐标轴
+        yAxis: {
+            type: 'value' //表明当前坐标轴的类型，纵坐标轴的默认类型是 值
+        },
+        // 序列/系列
+        series: [
+            {
+                name: '', // 当前数据的名称
+                type: '', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+                data: [] // 需要展示的数据
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

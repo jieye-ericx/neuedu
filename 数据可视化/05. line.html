@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图</title>
+    <script src="js/echarts.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        // 图表的标题部分
+        title: {
+            //正标题的内容
+            text: '一周的天气变化',
+            // 副标题的内容
+            subtext: '就是个数据'
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical', //确定工具箱的布局方式 横向或者纵向，默认横向 - 水平方向 horizontal
+            left: "right", // 可以是具体的数据 单位px， 也可以是方位，
+            feature: {
+                dataView: {
+                    show: true,
+                    readOnly: true
+                },
+                saveAsImage: {
+                    show: true,
+                    type: 'jpeg' //控制转换成为的本地图片的格式
+                },
+                dataZoom: {
+                    show: true,
+                    title: {
+                        dataZoom: '区域缩放',
+                        dataZoomReset: '区域缩放-后退'
+                    }
+                },
+                magicType: {
+                    show: true,
+                    title: { //鼠标移动到指定的地方出现的文字
+                        line: '动态类型切换 - 折线图',
+                        bar: '动态类型切换 - 柱状图',
+                        stack: '动态类型切换 - 堆积',
+                        titled: '动态类型切换 - 平铺'
+                    },
+                    type: ['line', 'bar', 'stack', 'titled']
+                }
+            }
+        },
+        tooltip: {
+            show: true,
+            trigger: "axis" // item值：鼠标移动到对应的形状上才会出现提示
+        },
+        // 图例
+        legend: {
+            // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+            data: ['最高温', '最低温']
+        },
+        // visualMap: {
+        //     calculable: true
+        // },
+        // 数据区域缩放控件 - 针对是整张图标
+        dataZoom: {
+            show: true,
+            realtime: true, // 是否需要实时显示缩放变化
+            start: 20, // 开始的比例 默认 0%
+            end: 80 // 结束的比例，默认为100%
+        },
+        // 横坐标轴
+        xAxis: {
+            type: 'category', //表明当前坐标轴的类型  默认横坐标轴就是类目
+            boundaryGap: false, // 类目起始和结束两端的空白策略，true则在前后都留有空白，false则不留空白
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        },
+        // 纵坐标轴
+        yAxis: {
+            type: 'value' //表明当前坐标轴的类型，纵坐标轴的默认类型是 值
+        },
+        // 序列/系列
+        series: [
+            {
+                name: '最高温', // 当前数据的名称
+                type: 'line', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+                data: [11, 11, 15, 13, 12, 13, 10], // 需要展示的数据
+            },
+            {
+                name: '最低温',
+                type: 'line',
+                data: [1, -2, 2, 5, 3, 2, 0]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>
