@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用百度地图API完成热力图</title>
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!--    引用百度地图api接口，使用自己创建的浏览器端的密钥-->
+    <script type="text/javascript"
+            src="https://api.map.baidu.com/api?v=2.0&ak=q10g5t0sQcNwnm4V0VjTGibetmtnfe3b"></script>
+    <!--    引用百度地图的js文件-->
+    <script src="js/bmap.min.js"></script>
+    <style>
+        #main {
+            width: 1200px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('main'));
+
+	var heatmapdata = new Array();
+	$.get('json/heatdata.json', function (heatdata) {
+		// console.log(heatdata);
+		var arrayObj = heatdata.streamAmountList;
+		//    处理拿到的数组 - json文件中读取到的
+		for (var i in arrayObj) {
+			let tempObj = arrayObj[i];
+			let tempArray = [tempObj.lng, tempObj.lat, tempObj.streamAmount];
+			heatmapdata.push(tempArray);
+		}
+
+		//    设置echarts的配置项
+		var option = {
+			// backgroundColor: '#f0f0f0',  // 借助百度地图api完成的地图绘制的图表中不要添加全局背景色，会覆盖掉百度地图的地图背景
+			animation: false,
+			//    设置百度地图
+			bmap: {
+				center: [123.429096, 41.796767],
+				zoom: 14,
+				roam: true
+			},
+			visualMap: {
+				show: false,
+				top: 'top',
+				min: 0,
+				max: 5,
+				seriesIndex: 0,
+				calculable: true,
+				inRange: {
+					color: ['blue', 'green', 'yellow', 'red']
+				}
+			},
+			series: [
+				{
+					type: 'heatmap',
+					coordinateSystem: 'bmap',
+					data: heatmapdata,
+					/**
+					 * array[
+					 *  [经度, 纬度, 数据],
+					 *  []
+					 * ]
+					 */
+					pointSize: 5,
+					blurSize: 6
+				}
+			]
+		};
+
+		myChart.setOption(option);
+		var bmap = myChart.getModel().getComponent('bmap').getBMap();
+		bmap.addControl(new BMap.MapTypeControl());
+	});
+
+</script>
+</body>
+</html>
