@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>利用百度地图API完成地图的绘制</title>
+    <script src="js/echarts.js"></script>
+    <!--    引用百度地图api接口，使用自己创建的浏览器端的密钥-->
+    <!--    我的百度地图API接口-->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=8ULMMFL73G9uKc7j5WV6GxjLw4x7ou4F"></script>
+    <!--    引用百度地图的js文件-->
+    <script src="js/bmap.min.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var data = [
+        {name:'和平区',value:33},
+        {name:'沈河区', value: 24},
+        {name: '皇姑区', value: 52},
+        {name: '大东区', value: 14},
+        {name: '铁西区', value: 93},
+        {name: '浑南区', value: 78},
+        {name: '于洪区', value: 45},
+        {name: '沈北新区', value: 82},
+        {name: '苏家屯区', value: 9},
+        {name: '新民市', value: 42},
+        {name: '辽中区', value: 99},
+        {name: '康平县', value: 77},
+        {name: '法库县', value: 65}
+    ];
+
+    for (var i = 0 ; i < 1000 ; i ++){
+        var tmpName = i.toString();
+        var tempValue = parseInt(Math.random()*30) + 10;
+        data.push({name:tmpName,value:tempValue});
+    };
+    var geoCoordMap = {
+        '和平区':[123.4204,41.78997],
+        '沈河区':[123.45871,41.79625],
+        '皇姑区':[123.42527,41.82035],
+        '大东区':[123.46997,41.80539],
+        '铁西区':[123.37675,41.80269],
+        '浑南区':[123.457707,41.719450],
+        '于洪区':[123.30807,41.794],
+        '沈北新区':[123.52658,42.05297],
+        '苏家屯区':[123.34405,41.66475],
+        '新民市':[122.82867,41.99847],
+        '辽中区':[122.72659,41.51302],
+        '康平县':[123.35446,42.75081],
+        '法库县':[123.41214,42.50608]
+    };
+    namelist = Object.keys(geoCoordMap);
+     for (var i = 0; i < 600;i ++){
+         for (var j = 0 ; j < namelist.length;j++){
+             if(i% namelist.length == j){
+                 var tempData = geoCoordMap[namelist[j]]
+                 var delta_x = Math.random()*0.10 + 0.01;
+                 var delta_y = Math.random()*0.10 + 0.01;
+                 geoCoordMap[i.toString()]=[tempData[0]+delta_x,tempData[1]+delta_y];
+             }
+         }
+     }
+
+    var convertData = function (data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            var geoCoord = geoCoordMap[data[i].name];
+            if (geoCoord) {
+                res.push({
+                    name: data[i].name,
+                    value: geoCoord.concat(data[i].value)
+                });
+            }
+        }
+        return res;
+    };
+    // 指定图表的配置项和数据
+    var option = {
+        // 图表的标题部分
+        title: {
+            //正标题的内容
+            text: '沈阳市iphone8销量',
+            // 副标题的内容
+            subtext: 'made by Liuguandi'
+        },
+        toolbox: {
+            show: true,
+            feature: {}
+        },
+        tooltip: {
+            show: true,
+            trigger: "axis" // item值：鼠标移动到对应的形状上才会出现提示
+        },
+        // 图例
+        legend: {
+            // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+            data: ['iphone 8']
+        },
+        visualMap: {
+            show: false,
+            top: 'top',
+            min: 0,
+            max: 5,
+            seriesIndex: 0,
+            calculable: true,
+            inRange: {
+                color: ['blue', 'green', 'yellow', 'red']
+            }
+        },
+        //设置百度地图
+        bmap: {
+            center: [123.429096,41.796767],
+            zoom: 11,
+            roam: true
+        },
+        // 序列/系列
+        series: [
+            {
+                name: 'iphone 8', // 当前数据的名称
+                type: 'heatmap',
+                coordinateSystem: 'bmap', // 将值改成bmap，确定是在百度地图上渲染数据
+                data: convertData(data), // 需要展示的数据
+                pointSize: 5,
+                blurSize: 6
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+</script>
+</body>
+</html>

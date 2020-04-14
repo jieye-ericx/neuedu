@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>入门程序</title>
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <style>
+        #main {
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<!-- 创建 图表显示的元素-->
+<div id="main"></div>
+<script type="text/javascript">
+// jQuery的自调用函数
+   $(function(){
+       // 基于准备好的dom，初始化echarts实例
+       var myChart = echarts.init(document.getElementById('main'));
+   //    方式一
+   //     $.get('json/data.json', function(data){
+   //         console.log(data);
+   //         myChart.setOption({
+   //             title: {
+   //                 text: '异步加载'
+   //             },
+   //             legend: {
+   //                 data: ['销量']
+   //             },
+   //             xAxis: [
+   //                 {
+   //                     data: data.category
+   //                 }
+   //             ],
+   //             yAxis: [{
+   //
+   //             }],
+   //             series: [
+   //                 {
+   //                     name: '销量',
+   //                     type: 'bar',
+   //                     data: data.value
+   //                 }
+   //             ]
+   //         });
+   //     });
+   //    方式二： 先加载空的配置项
+       myChart.setOption({
+           title: {
+               text: '异步加载'
+           },
+           legend: {
+               data: ['销量']
+           },
+           xAxis: [
+               {
+                   data: []
+               }
+           ],
+           yAxis: [{
+           }],
+           series: [
+               {
+                   name: '销量',
+                   type: 'bar',
+                   data: []
+               }
+           ]
+       });
+   //    加载数据
+       $.get('json/data.json', function(data){
+           myChart.setOption({
+               xAxis: [
+                   {
+                       data: data.category
+                   }
+               ],
+               series: [
+                   {
+                       // 根据名称对应到响应的序列当中的
+                       name: '销量',
+                       data: data.value
+                   }
+               ]
+           });
+       });
+   });
+</script>
+</body>
+</html>

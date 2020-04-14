@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>词云</title>
+    <script src="js/echarts.js"></script>
+<!--    引入词云的依赖库文件-->
+    <script src="js/echarts-wordcloud.js"></script>
+</head>
+<body>
+<!--
+    入门程序的基本步骤：
+    1. 引入ECharts的文件
+    2. 在body标签中创建出对应的HTML元素 - ECharts的容器
+    3. 在标签下方，编写JavaScript脚本：
+        3.1 创建ECharts的实例
+        3.2 完成option的内容设定
+        3.3 将option的值赋予ECharts实例中
+-->
+<!-- 当前的DOM元素 - 后面的图标展示的区域 -->
+<div id="main" style="width: 600px; height: 600px"></div>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    // 利用DOM元素创建ECharts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        //标题
+        title: {
+            text: '词云',
+            subtext: '就是数据' // 副标题
+        },
+        // 提示
+        tooltip: {},
+        //系列 ： 图标当中显示的数据
+        series: [
+            {
+                name: 'cloud Name',
+                type: 'wordCloud', // 当前展示的图表的类型 柱形图： bar 折现图 line
+                sizeRange: [12, 60],//词云条列大小范围
+                rotationRange: [0,0],//条列旋转范围
+                width: 600,
+                height: 400,
+                textStyle: {
+                    normal: {
+                        color: function(){
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160)
+                            ].join(',') + ')';
+                        },
+                        emphasis: {
+                            shadowBlur: 100,
+                            shadowColor: '#333'
+                        }
+                    }
+                },
+                data: [
+                    {
+                        name: 'Sam S Club',
+                        value: 10000,
+                        textStyle: {
+                            normal: {
+                                color: 'black'
+                            },
+                            emphasis: {
+                                color: 'red'
+                            }
+                        }
+                    },
+                    {
+                        name: 'Macys',
+                        value: 6181,
+                    },
+                    {
+                        name: 'Amy Schumer',
+                        value: 4386,
+                    },{
+                        name: 'Jurassic World',
+                        value: 4055,
+                    },
+                    {
+                        name: 'Chick Fil A',
+                        value: 2244,
+                    },
+                    {
+                        name: 'Charter Com munications',
+                        value: 2467,
+                    },
+                    {
+                        name: 'Planet Fitness',
+                        value: 1898,
+                    },
+                    {
+                        name: 'Pitch Perfect',
+                        value: 1481,
+                    },
+                    {
+                        name: 'Express',
+                        value: 1112,
+                    },
+                    {
+                        name: 'Home',
+                        value: 965,
+                    },
+                    {
+                        name: 'Johnny Deep',
+                        value: 847,
+                    },
+                    {
+                        name: 'Lena Dunham',
+                        value: 582,
+                    },
+                    {
+                        name: 'Lewis Hamilton',
+                        value: 555,
+                    },
+                    {
+                        name: 'KXAN',
+                        value: 550,
+                    },
+                    {
+                        name: 'Mary Ellen Mark',
+                        value: 462,
+                    },
+                    {
+                        name: 'Farrah Abraham',
+                        value: 366,
+                    },
+                    {
+                        name: 'Rita Ora',
+                        value: 360,
+                    },
+                    {
+                        name: 'Serena Williams',
+                        value: 282,
+                    },
+                    {
+                        name: 'NCAA baseball tournament',
+                        value: 273,
+                    },
+                    {
+                        name: 'Point Break',
+                        value: 265,
+                    }
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

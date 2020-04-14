@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>radoapx</title>
+  <script src="js/echarts.js"></script>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <style>
+    .parent {
+      display: flex;
+      width: 1300px;
+      justify-content: space-between;
+    }
+
+    #main1,
+    #main2 {
+      width: 800px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="parent">
+    <div id="main1"></div>
+    <div id="main2"></div>
+  </div>
+  <script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'));
+    var option1 = {
+      title: {
+        text: '网站的用户访问来源',
+        subtext: 'by 1405170212'
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: {
+            show: true
+          },
+          dataView: {
+            show: true,
+            readOnly: true
+          }
+        }
+      },
+      tooltip: {
+        show: true,
+        trigger: "item",
+        formatter: '{a} </br> {b} : {c} ({d}%)'
+      },
+      // 图例
+      legend: {
+        left: 'center',
+        orient: 'vertical',
+        data: []
+      },
+      // 序列/系列
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '50%',
+          center: ['50%', '60%'],
+          itemStyle: {
+            normal: {
+              label: {
+                show: true,
+                formatter: '{b} : {c} ({d}%)'
+              }
+            }
+          },
+          data: []
+        }
+      ]
+    };
+    myChart1.setOption(option1);
+
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    var option2 = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      legend: {
+        data: []
+      },
+      toolbox: {
+        show: true,
+        orient: 'vertical',
+        y: 'center',
+        feature: {
+          magicType: {
+            show: true,
+            type: ['line', 'bar']
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          splitArea: {
+            show: true
+          }
+        }
+      ]
+    };
+    myChart2.setOption(option2);
+    console.log(1405170212);
+    $.get('json/addata.json', function (data) {
+      console.log(data);
+      myChart1.setOption({
+        legend: [
+          {
+            data: data.l_data
+          }
+        ],
+        series: [
+          {
+            data: data.c1_data
+          }
+        ]
+      });
+      myChart2.setOption({
+        legend: [
+          {
+            data: data.l_data
+          }
+        ],
+        series: data.c2_data
+      });
+    });
+    echarts.connect([myChart1, myChart2]);
+  </script>
+</body>
+
+</html>
