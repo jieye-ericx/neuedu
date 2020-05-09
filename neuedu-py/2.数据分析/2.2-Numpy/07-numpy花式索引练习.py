@@ -30,12 +30,12 @@ a2 = arr[[7]][:, [2, 3]]    # 30 31
 
 
 # 如果合并的矩阵形状不一致,能否进行合并
-n1 = np.arange(9).reshape(3, 3)
-print(n1)
-print("*" * 50)
-n2 = np.arange(15).reshape(3, 5)
-print(n2)
-print("*" * 50)
+# n1 = np.arange(9).reshape(3, 3)
+# print(n1)
+# print("*" * 50)
+# n2 = np.arange(12).reshape(4, 3)
+# print(n2)
+# print("*" * 50)
 # print(np.vstack((n1, n2)))
 
 
