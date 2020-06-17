@@ -1,6 +1,7 @@
 from collections.abc import Iterable
 from collections.abc import Iterator
 
+# 字符串 不是可迭代对象
 
 # iterable
 # 可迭代对象
@@ -21,13 +22,10 @@ def t2():
 
 def fibonacci(num):
     print("------------------1---------------------")
-
     # 初始化
     num1, num2 = 0, 1
-
     # 索引
     index = 0
-
     while index < num:
         # 0 1 1 2 3 5 8 13 21 35 56 .......
         print("------------------2-----------------------")
@@ -69,9 +67,10 @@ if __name__ == '__main__':
     # 创建生成器的方式
     # 第一种:利用列表生成式来创建
     # l = (i for i in range(1000000000))
-    # # print(type(l))
+    # print(type(l))
     # print(l)
-    # print(isinstance(l, Iterable))  # 生成器对象是可迭代对象
+    # print(isinstance(l, Iterable))
+    # 生成器对象是可迭代对象
 
     # for x in l:
     #     print(x)
@@ -83,12 +82,15 @@ if __name__ == '__main__':
 
     # 斐波那契数列
     # 0 1 1 2 3 5 8 13 21 35 56 .......
-    f = fibonacci(99)
-    # print(type(f))
-    # print(isinstance(f, Iterable))
-    # print(isinstance(f, Iterator))
-    # print(f)
-
+    f = fibonacci(5)
+    print(type(fibonacci))
+    print(isinstance(f, Iterable))
+    print(isinstance(f, Iterator))
+    print(f)
+    a=next(f)
+    print(a)
+    a = next(f)
+    print(a)
     # 显示结果
     # for循环
     # for x in f:

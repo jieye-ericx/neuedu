@@ -62,29 +62,28 @@ class BMWImagePipline(ImagesPipeline):
 
 
 class DMPipeline(object):
-    # def open_spider(self, spider):
-    #     """在管道被启用的时候会被执行一次"""
-    #     # 打开文件或者打开数据库连接
-    #     # self.file = open("./")
-    #     pass
+    def open_spider(self, spider):
+        """在管道被启用的时候会被执行一次"""
+        # 打开文件或者打开数据库连接
+        # self.file = open("./")
+        pass
 
     def process_item(self, item, spider):
-        # 1. 先获取Book文件夹的路径
-        book_store = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Book")
-        # 2. 拼接小说目录
+        book_store = os.path.join(os.path.dirname(__file__), "Book")
+
         fiction_path = os.path.join(book_store, item['fiction_name'])
-        # 3. 判断小说的目录存在与否
+        print(fiction_path)
         if not os.path.exists(fiction_path):
             # 如果没有分类文件夹就创建该文件夹
-            print("----------创建文件夹----------")
-            os.makedirs(fiction_path)
-        # 小说章节
-        fiction_store = os.path.join(fiction_path, "{}-{}".format(item['section'], item['section_name']))
-        # 写入文件
-        with open(fiction_store, 'w', encoding='utf-8') as f:
-            # 写入文件
-            f.write(item['section_content'])
-        return item
+            print("--------------------")
+            os.mkdir(fiction_path)
+
+        # file_name = "E:\Work\Python\Python Class\南工业scrapy\Spiderproject\Book\{}-{}-{}.txt".format(item['fiction_name'], item['section'], item['section_name'])
+
+        # with open(file_name, 'a', encoding='utf-8') as f:
+        #     # 写入文件
+        #     f.write(item['section_content'])
+        # return item
 
     def close_spider(self, spider):
         """在管道关闭的时候会被执行一次"""
