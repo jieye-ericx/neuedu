@@ -16,12 +16,12 @@ print(n1)
 print(np.count_nonzero(n1))
 
 # 2. 统计n1数组中的nan个数
-# new_nd = (n1 != n1)
-# print(new_nd)
-# print(np.count_nonzero(new_nd))
+new_nd = (n1 != n1)
+print(new_nd)
+print(np.count_nonzero(new_nd))
 
-# print(np.isnan(n1))
-# print(np.count_nonzero(n1 != n1))
+print(np.isnan(n1))
+print(np.count_nonzero(n1 != n1))
 
 # 关于nan
 # 常见的处理方法

@@ -10,11 +10,15 @@ request_header = {
                   "Chrome/79.0.3945.88 Safari/537.36"
 }
 
+params = {
+
+}
 # 1. 发送请求
-response = requests.get(url=url2, headers=request_header)
+response = requests.get(url=url2, headers=request_header, params=params)
 
 # 2. 输出
-# print(response.status_code)
+print(response.json())
+print(type(response.json()))
 # print(response.content.decode())
 
 res = response.content.decode()

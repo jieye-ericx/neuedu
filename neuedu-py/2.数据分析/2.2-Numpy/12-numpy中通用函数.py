@@ -32,7 +32,7 @@ n3 = np.array([1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0,
 print("----------------n1----------------")
 print(n1)
 # 过滤n2中的0值
-n2 = np.where(n2 == 0, 1, n2)
+# n2 = np.where(n2 == 0, 1, n2)
 print("----------------n2----------------")
 print(n2)
 # print("*" * 50)
@@ -55,10 +55,8 @@ print(n2)
 # mod 求模计算
 # copysign
 # 将后面的矩阵元素的符号复制给第一个矩阵
-# print(np.copysign(n1, n2))
+print(np.copysign(n1, n2))
 
 # 比较级函数, 返回bool型的矩阵
-# print(np.greater(n1, n2))
-# print(np.greater_equal())
-
-
+print(np.greater(n1, n2))
+print(np.greater_equal(n1, n2))

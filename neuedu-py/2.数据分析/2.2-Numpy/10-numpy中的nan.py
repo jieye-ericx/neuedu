@@ -13,13 +13,14 @@ print(n)
 
 # 将矩阵n中小于10的元素置为0, 大于等于10的置为999
 # print(np.where(n < 10, 0, 999))
-
+# print(n)
 # 将矩阵n中小于10的替换成10, 大于20的替换成20
 # 原地操作,直接作用于源数据
+# print('1'*100)
 # print(n.clip(10, 20))
-
+# print(n)
 n = n.astype(float)
-# print(n)
+print(n)
 n[3, 3] = np.nan
-# print(n)
+print(n)
 print(n.clip(10, 20))

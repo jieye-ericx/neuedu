@@ -11,17 +11,18 @@ import numpy as np
 # print(n2)
 
 # zeros_like
-# n3 = np.arange(9).reshape(3, 3)
-# n4 = np.zeros_like(n3)
-# print(n4.shape)
-# print(n4)
+n3 = np.arange(9).reshape(3, 3)
+print(n3)
+n4 = np.zeros_like(n3)
+print(n4.shape)
+print(n4)
 
 # ones 创建指定形状的ndarray,数据填充为1
-# n5 = np.ones((2, 3, 3))
-# print(n5)
+n5 = np.ones((2, 3, 3))
+print(n5)
 
 # 创建方阵
 # 特点: 行数和列数一致
 # 对角线元素为1
-# n6 = np.eye(3)
-# print(n6)
+n6 = np.eye(8, dtype='str')
+print(n6)

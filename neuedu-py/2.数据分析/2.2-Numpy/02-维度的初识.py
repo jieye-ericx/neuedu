@@ -1,6 +1,5 @@
 import numpy as np
 
-
 # 维度 (1维 2维 3维)
 # 1维 ---> 线(向量) 也就是只有一个轴 axis = 0
 # n1 = np.arange(10)
@@ -12,9 +11,11 @@ import numpy as np
 # 2维 ---> 面(矩阵) axis = 0 1
 # n2 = np.arange(9).reshape(3, 3)
 # print(n2)
-# print(n2.ndim)
-# print(n2.shape)
-
+# [[0 1 2]
+#  [3 4 5]
+#  [6 7 8]]
+# print(n2.ndim)  # 2
+# print(n2.shape)  # (3,3)
 
 # 3维 ---> 体(带有深度的矩阵) axis = 0 1 2
 # n3 = np.arange(1, 25).reshape(2, 4, 3) # 深度 行数 列数
@@ -24,19 +25,21 @@ import numpy as np
 
 
 # 查看ndarray中的元素个数
-# n2 = np.arange(9).reshape(3, 3)
-# print(n2)
-# print(n2.ndim)
-# print(n2.shape)
-# print(n2.size)
+n2 = np.arange(4, 13)
+print(n2)
+n2.shape = (3, 3)
+print(n2)
+print(n2.ndim)
+print(n2.shape)
+print(n2.size)
 
 # 查看ndarray中的数据类型
 # print(n2.dtype)
 
 # 创建ndarray的时候可以指定其数据类型
-# n4 = np.array(range(5), dtype='f8')
-# print(n4)
-# print(n4.dtype)
+n4 = np.array(range(5), dtype='f8')
+print(n4)
+print(n4.dtype)
 
 # 通过astype()函数可以转换ndarray的数据类型
 # astype不属于原地操作
@@ -48,8 +51,8 @@ import numpy as np
 # n5 = np.array([2, 3, 4, 1], dtype=np.bool)
 # print(n5)
 # print(n5.dtype)
-
-# bool 转 int32
+#
+# # bool 转 int32
 # n6 = np.array([True, True, False, True])
 # n7 = n6.astype('i4')
 # print(n7)

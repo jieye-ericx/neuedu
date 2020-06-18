@@ -1,10 +1,16 @@
 import numpy as np
 
-
 arr = np.arange(32).reshape(8, 4)
 # print(arr)
 # print("*" * 50)
-
+# [[ 0  1  2  3]
+#  [ 4  5  6  7]
+#  [ 8  9 10 11]
+#  [12 13 14 15]
+#  [16 17 18 19]
+#  [20 21 22 23]
+#  [24 25 26 27]
+#  [28 29 30 31]]
 
 # 1. 取0 4 5行 按照0 3 1 2排列
 # print(arr[[0, 4, 5]][:, [0, 3, 1, 2]])
@@ -16,15 +22,16 @@ arr = np.arange(32).reshape(8, 4)
 # 3. 矩阵合并
 # 15 14
 # 30 31
-a1 = arr[[3]][:, [3, 2]]    # 15 14
-a2 = arr[[7]][:, [2, 3]]    # 30 31
-# print(a1)
-# print(a2)
+# print(arr[[3,7]][:,[3,2]])
+a1 = arr[[3]][:, [3, 2]]  # 15 14
+a2 = arr[[7]][:, [2, 3]]  # 30 31
+print(a1)
+print(a2)
 #
 # # 行上合并
 # a3 = np.hstack((a1, a2))
 # print(a3)
-#
+# #
 # a4 = np.vstack((a2, a1))
 # print(a4)
 
@@ -44,4 +51,4 @@ a2 = arr[[7]][:, [2, 3]]    # 30 31
 # axis=0 行  垂直合并(列合并)
 # axis=1 列  水平合并
 print(np.concatenate((a1, a2), axis=0))
-print(np.concatenate((a1, a2), axis=1))
+# print(np.concatenate((a1, a2), axis=1))

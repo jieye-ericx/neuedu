@@ -13,8 +13,8 @@ print(n1)
 
 # argmax 默认情况下按照一维数组索引, 返回最大元素的索引
 # print(np.argmax(n1))
-# 同样我们可以指定axis轴向,来返回列或者行中最大元素的索引
-# print(np.argmax(n1, axis=0))
+# # 同样我们可以指定axis轴向,来返回列或者行中最大元素的索引
+print(np.argmax(n1, axis=0))
 # print(np.argmax(n1, axis=1))
 
 # mean 求所有元素的平均值
@@ -69,15 +69,15 @@ print(n1)
 # 道琼斯工业指数   指的就是算数平均值
 # 标准500普尔指数  加权平均值
 
-# n2 = np.array([1, 2, 3, 4])
-# print("---------调用average()函数------------")
-# print(np.average(n2))
+n2 = np.array([1, 2, 3, 4])
+print("---------调用average()函数------------")
+print(np.average(n2))
 #
-# heights = np.array([4, 3, 2, 1])
-# print("---------再次调用average()函数---------------")
-# print(np.average(n2, weights=heights))
-# # 返回权重和
-# print(np.average(n2, weights=heights, returned=True))
+heights = np.array([4, 3, 2, 1])
+print("---------再次调用average()函数---------------")
+print(np.average(n2, weights=heights))
+# 返回权重和
+print(np.average(n2, weights=heights, returned=True))
 
 # 标准差
 # 标准差是一组数据平局之分散程度的一种度量
@@ -87,30 +87,3 @@ print(n1)
 # n2 = np.array([1, 2, 3, 4])
 # print(np.std(n2))
 # print(np.var(n2))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

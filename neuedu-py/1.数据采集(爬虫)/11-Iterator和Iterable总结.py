@@ -1,4 +1,4 @@
-from collections import Iterable
+from collections.abc import Iterable
 from collections.abc import Iterator
 
 # 字符串 列表 元组 字典

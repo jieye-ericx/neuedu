@@ -49,14 +49,17 @@ tree_object = etree.HTML(html)
 # results = tree_object.xpath("//div/ul/li[@class='i1']/a/text()")
 # results = tree_object.xpath("//a[@href='link1.html']/text()")
 # --------- 获取属性值
-results = tree_object.xpath('//ul/li/a/@href')
+results = tree_object.xpath('//ul//a/text()')
+results = tree_object.xpath('//ul/li[@class="i5"]//text()')
+results = tree_object.xpath('//ul/li/@class')
+results = tree_object.xpath('//ul/li//a/@href')
 print(results)
 
 # 获取属性为neuedu标签下的第一个ul标签下的a标签的内容
-# results = tree_object.xpath('//div[@class="neuedu"]/ul[1]/li/a/text()')
-# results = tree_object.xpath('//div[@class="neuedu"]/ul[last()-1]/li/a/text()')
-# results = tree_object.xpath('//div[@class="neuedu"]/ul[last()-1]//a/text()')
-
+results = tree_object.xpath('//div[@class="neuedu"]/ul[1]/li/a/text()')
+results = tree_object.xpath('//div[@class="neuedu"]/ul[last()-1]/li/a/text()')
+results = tree_object.xpath('//div[@class="neuedu"]/ul[last()-1]//a/text()')
+print(results)
 # *表示不限定节点
 # results = tree_object.xpath('//*[@class="neuedu"]//a/text()')
 

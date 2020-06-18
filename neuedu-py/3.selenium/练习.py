@@ -2,7 +2,7 @@ from selenium import webdriver
 
 
 # 1. 创建webdriver对象
-chrome_driver = webdriver.ie()
+chrome_driver = webdriver.safari()
 
 url = "https://search.jd.com/Search?keyword=%E6%80%A1%E5%AE%9D%E7%9F%BF%E6%B3%89%E6%B0%B4&enc=utf-8&spm=a.0.0&pvid=8ff9fafda3d64477a4826d1673eb0930"
 

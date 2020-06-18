@@ -4,9 +4,7 @@
 
 from matplotlib import pyplot as plt
 
-
-plt.rcParams["font.sans-serif"] = ['SimHei']
-plt.figure(figsize=(20, 8), dpi=80)
+plt.figure(figsize=(200, 8), dpi=80)
 
 # 2月份数据
 nan_2_t_max = [

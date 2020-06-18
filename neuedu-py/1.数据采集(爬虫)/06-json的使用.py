@@ -10,13 +10,16 @@ header = {
                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
 }
 # 3. 发送请求获取响应(数据)
-res = requests.get(url=url, headers=header).content.decode()
+res = requests.get(url=url, headers=header).json()
 
 # print(res)
 # print(type(res))
+print(res['subjects'])
+print(type(res))
 
+json.dump()
 # json.loads 将带有字典格式的字符串(json字符串)转换成python对象
-res_dict = json.loads(res)
+# res_dict = json.loads()
 
 # 在列表中遍历
 # print(len(res_dict["subjects"]))
@@ -27,15 +30,15 @@ res_dict = json.loads(res)
 
 
 # 关于写入文件
-with open("./db_tv_new_3.json", "w", encoding="utf-8") as f:
-    # 1.1 直接写入得到的字符串
-    f.write(res)
-
-    # 1.2 使用json.dumps()
-    f.write(json.dumps(res_dict, ensure_ascii=False, indent=4))
-
-    # 1.3 把python类型
-    json.dump(res_dict, f, ensure_ascii=False, indent=4)
+# with open("./db_tv_new_3.json", "w", encoding="utf-8") as f:
+#     # 1.1 直接写入得到的字符串
+#     f.write(res)
+#
+#     # 1.2 使用json.dumps()
+#     f.write(json.dumps(res_dict, ensure_ascii=False, indent=4))
+#
+#     # 1.3 把python类型
+#     json.dump(res_dict, f, ensure_ascii=False, indent=4)
 
 
 # 关于读取文件

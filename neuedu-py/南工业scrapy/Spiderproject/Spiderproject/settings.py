@@ -1,5 +1,5 @@
 import os
-
+# import pillow
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for Spiderproject project

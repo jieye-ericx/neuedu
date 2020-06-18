@@ -13,9 +13,9 @@ import numpy as np
 #
 # # 3. 姓名向量
 # # 注意: 如果bool类型的长度不对, 使用bool索引时将会报错
-# names = np.array(['aaa', 'bbb', 'ccc', 'ddd'])
-# print("-------------names---------------")
-# print(names)
+names = np.array(['aaa', 'bbb', 'ccc', 'ddd'])
+print("-------------names---------------")
+print(names)
 #
 # # 练习1:将n1中所有比2大的元素设置成222
 # n1[n1 > 2] = 222
@@ -29,34 +29,14 @@ import numpy as np
 
 n = np.arange(24).reshape((4, 6))
 print(n)
-
-# 将n矩阵中所有小于10的数变成999 (原地操作:直接更改数据源)
-n[n < 10] = 999
-print(n)
-
-# 将矩阵n中小于10的元素置为0, 大于等于10的置为999
-print(np.where(n < 10, 0, 999))
+#
+# # 将n矩阵中所有小于10的数变成999 (原地操作:直接更改数据源)
+# n[n < 10] = 999
+# print(n)
+#
+# # 将矩阵n中小于10的元素置为0, 大于等于10的置为999
+# print(np.where(n < 10, 0, 999))
 
 # 将矩阵n中小于10的替换成10, 大于20的替换成20
 # 原地操作,直接作用于源数据
-# print(n.clip(10, 20))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(n.clip(10, 20))

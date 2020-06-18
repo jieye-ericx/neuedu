@@ -1,16 +1,20 @@
 import numpy as np
 
-
 # -------------all函数以及any函数-------------------
 # np.all  实际上是逻辑与操作
 # np.any  逻辑或操作
 
-# n1 = np.arange(5)      # 0 1 2 3 4
-# print(np.all(n1))      # False
+n1 = np.arange(1, 5)
+# print(n1)  # 0 1 2 3 4
+# print(np.all(n1))  # False
 #
-# n2 = np.array([0, 3, 0, 0, 0])  # 0 3 0 0 0
-# print(np.all(n2))
+n2 = np.array([0, 3, 0, 0, 0])  # 0 3 0 0 0
+# print(np.all(n2)) # false
 
+# n11 = np.full((3, 4), 100)
+# print(n11)
+# n22 = np.full_like(n11, 99)
+# print(n22)
 # 全0矩阵 全1矩阵 全False 全True
 # n3 = np.full_like(n2, True)
 # n3[0] = False
@@ -25,12 +29,12 @@ import numpy as np
 # 一维
 # n1 = np.arange(4)
 # print(n1)
-#
-# # 向一维向量的尾部追加元素,属于非原地操作(返回一个全新的一维向量)
+# #
+# # # 向一维向量的尾部追加元素,属于非原地操作(返回一个全新的一维向量)
 # print(np.append(n1, 4))
 # print(n1)
-#
-# # 同样可以追加列表
+# #
+# # # 同样可以追加列表
 # print(np.append(n1, [666, 777, 888]))
 # # 同样追加一个一维向量
 # print(np.append(n1, np.arange(6)))
@@ -45,27 +49,28 @@ import numpy as np
 
 
 # --------------------------------concatenate
-# n3 = np.arange(12).reshape(3, 4)
-# n4 = np.arange(4)
-# n5 = np.arange(5)
-# n6 = np.arange(12).reshape(3, 4)
+n3 = np.arange(12).reshape(3, 4)
+n4 = np.arange(4)
+n5 = np.arange(5)
+n6 = np.arange(12).reshape(3, 4)
 # print("没合并之前输入n3 n4 n5")
 # print(n3)
 # print("-"*10)
-# print(n4)
+# print(n4) # [0 1 2 3]
 # print("-"*10)
-# print(n5)
+# print(n5) # [0 1 2 3 4]
 #
 # # 一维和一维合并
 # # concatenate函数返回一个新的一维向量
 # print(np.concatenate((n4, n5)))
+# [0 1 2 3 0 1 2 3 4]
 #
 # # 二维矩阵的合并
 # # 形状相同
 # # 行合并(保证行相同)
-# # print(np.concatenate((n3, n6), axis=1))
-# # 列合并
-# # print(np.concatenate((n3, n6), axis=0))
+# print(np.concatenate((n3, n6), axis=1))
+# # # 列合并
+# print(np.concatenate((n3, n6), axis=0))
 #
 # # 形状不同
 # # 要么行数相同,要么列数相同
@@ -131,8 +136,8 @@ n1 = np.array([2, 3, 4, 5, 5, 3, 2, 9])
 # print(new_nd)
 # print(index_list)
 
-# new_nd, x, y, z = np.unique(n1, return_index=True, return_inverse=True, return_counts=True)
-# print(new_nd)
-# print(x)
-# print(y)
-# print(z)
+new_nd, x, y, z = np.unique(n1, return_index=True, return_inverse=True, return_counts=True)
+print(new_nd)
+print(x)
+print(y)
+print(z)
