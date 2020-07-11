@@ -1,107 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>入门程序</title>
-    <script src="js/echarts.js"></script>
-    <style>
-        .parent {
-            display: flex;
-            width: 1300px;
-            justify-content: space-between;
-        }
-        #main1,#main2 {
-            width: 600px;
-            height: 500px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>入门程序</title>
+  <script src="js/echarts.js"></script>
+  <style>
+    .parent {
+      display: flex;
+      width: 1300px;
+      justify-content: space-between;
+    }
+
+    #main1,
+    #main2 {
+      width: 600px;
+      height: 500px;
+    }
+  </style>
 </head>
+
 <body>
-<!-- 创建 图表显示的元素-->
-<div class="parent">
+  <!-- 创建 图表显示的元素-->
+  <div class="parent">
     <div id="main1"></div>
     <div id="main2"></div>
-</div>
-<script type="text/javascript">
+  </div>
+  <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart1 = echarts.init(document.getElementById('main1'));
 
     // 指定图表的配置项和数据
     var option1 = {
-        // 图表的标题部分
-        title: {
-            //正标题的内容
-            text: '网站的用户访问来源',
-            // 副标题的内容
-            subtext: '基本数据展示'
-        },
-        toolbox: {
+      // 图表的标题部分
+      title: {
+        //正标题的内容
+        text: '网站的用户访问来源',
+        // 副标题的内容
+        subtext: '基本数据展示'
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: {
+            show: true
+          },
+          dataView: {
             show: true,
-            feature: {
-                saveAsImage: {
-                    show: true
-                },
-                dataView: {
-                    show: true,
-                    readOnly: true
-                }
+            readOnly: true
+          }
+        }
+      },
+      tooltip: {
+        show: true,
+        trigger: "item", // item值：鼠标移动到对应的形状上才会出现提示
+        //格式化数据的 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+        formatter: '{a} </br> {b} : {c} ({d}%)'
+      },
+      // 图例
+      legend: {
+        left: 'center',
+        orient: 'vertical',
+        // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+      },
+      // 序列/系列
+      series: [
+        {
+          name: '访问来源', // 当前数据的名称
+          type: 'pie', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+          // 半径 : 支持绝对值的方式 px 百分比
+          radius: '50%',
+          // 圆心 : 同样支持两种方式设置
+          center: ['50%', '60%'],
+          itemStyle: {
+            // 默认的样式 - 一般情况下展现的样式
+            normal: {
+              label: { // 提示的样式
+                show: true,
+                formatter: '{b} : {c} ({d}%)'
+              }
             }
-        },
-        tooltip: {
-            show: true,
-            trigger: "item", // item值：鼠标移动到对应的形状上才会出现提示
-            //格式化数据的 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
-            formatter:'{a} </br> {b} : {c} ({d}%)'
-        },
-        // 图例
-        legend: {
-            left: 'center',
-            orient: 'vertical',
-            // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
-            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-        },
-        // 序列/系列
-        series: [
+          },
+          data: [
             {
-                name: '访问来源', // 当前数据的名称
-                type: 'pie', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
-                // 半径 : 支持绝对值的方式 px 百分比
-                radius: '50%',
-                // 圆心 : 同样支持两种方式设置
-                center: ['50%', '60%'],
-                itemStyle: {
-                    // 默认的样式 - 一般情况下展现的样式
-                    normal: {
-                        label: { // 提示的样式
-                            show: true,
-                            formatter: '{b} : {c} ({d}%)'
-                        }
-                    }
-                },
-                data: [
-                    {
-                        name: '直接访问',
-                        value: 335
-                    },
-                    {
-                        name: '邮件营销',
-                        value: 310
-                    },
-                    {
-                        name: '联盟广告',
-                        value: 234
-                    },
-                    {
-                        name: '视频广告',
-                        value: 210
-                    },
-                    {
-                        name: '搜索引擎',
-                        value: 1810
-                    }
-                ] // 需要展示的数据
+              name: '直接访问',
+              value: 335
+            },
+            {
+              name: '邮件营销',
+              value: 310
+            },
+            {
+              name: '联盟广告',
+              value: 234
+            },
+            {
+              name: '视频广告',
+              value: 210
+            },
+            {
+              name: '搜索引擎',
+              value: 1810
             }
-        ]
+          ] // 需要展示的数据
+        }
+      ]
     };
 
     // 使用刚指定的配置项和数据显示图表。
@@ -109,75 +113,75 @@
 
     var myChart2 = echarts.init(document.getElementById('main2'));
     var option2 = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        legend: {
-            data:  ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-        },
-        toolbox: {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      legend: {
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+      },
+      toolbox: {
+        show: true,
+        orient: 'vertical',
+        y: 'center',
+        feature: {
+          magicType: {
             show: true,
-            orient: 'vertical',
-            y: 'center',
-            feature: {
-                magicType: {
-                    show: true,
-                    type: ['line', 'bar']
-                },
-                saveAsImage: {
-                    show: true
-                }
-            }
+            type: ['line', 'bar']
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          splitArea: {
+            show: true
+          }
+        }
+      ],
+      series: [
+        {
+          name: '直接访问',
+          type: 'bar',
+          stack: '总量', //组合名称 ，双数值轴的时候无效，多组数据的堆积图的时候使用
+          data: [320, 333, 302, 334, 398, 340, 330]
         },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['周一','周二','周三','周四','周五','周六','周日']
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                splitArea: {
-                    show: true
-                }
-            }
-        ],
-        series: [
-            {
-                name: '直接访问',
-                type: 'bar',
-                stack: '总量', //组合名称 ，双数值轴的时候无效，多组数据的堆积图的时候使用
-                data: [320,333,302,334,398,340,330]
-            },
-            {
-                name: '邮件营销',
-                type: 'bar',
-                stack: '总量',
-                data: [120,110,102,103,105,100,123]
-            },
-            {
-                name: '联盟广告',
-                type: 'bar',
-                stack: '总量',
-                data: [220,222,230,223,233,242,224]
-            },
-            {
-                name: '视频广告',
-                type: 'bar',
-                stack: '总量',
-                data: [150,240,302,203,333,366,402]
-            },
-            {
-                name: '搜索引擎',
-                type: 'bar',
-                stack: '总量',
-                data: [820,1200,1003,1025,1034,1400,1000]
-            }
-        ]
+        {
+          name: '邮件营销',
+          type: 'bar',
+          stack: '总量',
+          data: [120, 110, 102, 103, 105, 100, 123]
+        },
+        {
+          name: '联盟广告',
+          type: 'bar',
+          stack: '总量',
+          data: [220, 222, 230, 223, 233, 242, 224]
+        },
+        {
+          name: '视频广告',
+          type: 'bar',
+          stack: '总量',
+          data: [150, 240, 302, 203, 333, 366, 402]
+        },
+        {
+          name: '搜索引擎',
+          type: 'bar',
+          stack: '总量',
+          data: [820, 1200, 1003, 1025, 1034, 1400, 1000]
+        }
+      ]
     };
     myChart2.setOption(option2);
 
@@ -188,7 +192,8 @@
     // myChart2.group = 'group1';
     // echarts.connect('group1');
     // 数组： 存放的就是所有的需要绑定的Echarts的实例
-     echarts.connect([myChart1, myChart2]);
-</script>
+    echarts.connect([myChart1, myChart2]);
+  </script>
 </body>
+
 </html>

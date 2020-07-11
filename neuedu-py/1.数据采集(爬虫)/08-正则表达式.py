@@ -1,10 +1,10 @@
 import re
 
 # 需要检测的文本
-# content = 'Hello 123 4567 World_This is a Regex Demo, Regex'
+content = 'Hello 123 4567 World_This is a Regex Demo, Regex'
 # #
 # # # 1. 匹配字符串Hello 123 4567 World_This
-# pattern = '^Hello\s\d\d\d\s\d{4}\s\w{10}'
+pattern = '^Hello\s\d\d\d\s\d{4}\s\w{10}'
 #
 # # 2. 匹配任意字符
 # pattern = '.*'
@@ -18,14 +18,13 @@ import re
 #
 # # 匹配返回的结果
 # # match() 从字符串起始位置匹配正则表达式
-# res = re.match(pattern, content)
-# print(res)
-# print(res.group())
-# print(res.span())
-# print(res.end())
-
-# print(res.group())
-
+res = re.match(pattern, content)
+print(res)
+print(type(res))
+print(res.group())
+print(res.span())
+print(res.start())
+print(res.end())
 
 # 贪婪模式和非贪婪模式
 # html = """
@@ -55,12 +54,12 @@ html = """
 """
 
 # 1. 使用贪婪模式
-# result1 = re.compile('<div>.*?<book>.*<p>.*</p>', re.S).findall(html)
+# result1 = re.compile('<div(.*)<book>.*<p>.*</p>', re.S).findall(html)
 # print("------ 使用贪婪模式匹配结果 ------- 尽可能多的去匹配")
 # print(result1)
 #
 # # 2. 使用非贪婪
-# result2 = re.compile('<div>.*?<book>.*?<p>.*?</p>', re.S).findall(html)
+# result2 = re.compile('<div(.*?)<book>(.*?)<p>(.*?)</p>', re.S).findall(html)
 # print("------ 使用非贪婪模式匹配结果 ------- 尽可能少的去匹配")
 # print(result2)
 
@@ -73,9 +72,9 @@ html = """
 s = "AX B C D"
 #
 # 1. 提取结果是A B和C D 规则怎么写
-r1 = re.compile('\w+\s\w').findall(s)
-print(type(r1))
-print(r1)  # ['AX B', 'C D']
+# r1 = re.compile('\w+\s\w').findall(s)
+# print(type(r1))
+# print(r1)  # ['AX B', 'C D']
 # 2. 提取结果是A 和C 提取规则怎么写?
 # r2 = re.compile('(\w+)\s+\w+').findall(s)
 # print(r2)  # ['AX', 'C']
@@ -85,26 +84,26 @@ print(r1)  # ['AX B', 'C D']
 # print(r1)
 # r2 = re.compile('(\w)\w*\s+\w+').findall(s)
 # print(r2)  # ['A', 'C']
-# TODO
+
 # # 3. 提取结果是(A,B)和(C,D) 提取规则又怎么写?
 # r3 = re.compile('(\w+)\s(\w+)').findall(s)
 # r3 = re.compile('(\w)\w*\s(\w+)').findall(s) #自己写的
 # print(r3)
 
 
-# html = '''
-# <div id="songs-list">
-# <h2 class="title">经典老歌</h2>
-# <p class="introduction">经典老歌列表</p>
-# <ul id="list" class="list-group">
-# <li data-view="2"><a href="/1.mp3" singer="吴奇隆">一路上有你</a></li>
-# <li data-view="7"><a href="/2.mp3" singer="任贤齐">沧海一声笑</a></li>
-# <li data-view="4"><a href="/3.mp3" singer="齐秦">往事随风</a></li>
-# <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
-# <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
-# <li data-view="5"><a href="/6.mp3" singer="邓丽君">但愿人长久</a></li>
-# </ul>
-# </div>'''
+html = '''
+<div id="songs-list">
+<h2 class="title">经典老歌</h2>
+<p class="introduction">经典老歌列表</p>
+<ul id="list" class="list-group">
+<li data-view="2"><a href="/1.mp3" singer="吴奇隆">一路上有你</a></li>
+<li data-view="7"><a href="/2.mp3" singer="任贤齐">沧海一声笑</a></li>
+<li data-view="4"><a href="/3.mp3" singer="齐秦">往事随风</a></li>
+<li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+<li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+<li data-view="5"><a href="/6.mp3" singer="邓丽君">但愿人长久</a></li>
+</ul>
+</div>'''
 
 # print('==================================================')
 #
@@ -128,5 +127,5 @@ print(r1)  # ['AX B', 'C D']
 # print(result.group(0))
 # print(result.group(1))
 # print(result.group(2))
-
+# print(type(result))
 # li data-view="4" class="active"><a href="/3.mp3" singer="齐秦">往事随风<

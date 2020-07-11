@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>入门程序</title>
+  <script src="js/echarts.js"></script>
+  <style>
+    #main {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 创建 图表显示的元素-->
+  <div id="main"></div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+      // 图表的标题部分
+      title: {
+        //正标题的内容
+        text: 'ECharts 入门示例',
+        // 副标题的内容
+        subtext: '副标题'
+      },
+      // 鼠标移入数据等出现的提示框
+      tooltip: {
+        show: true,
+        trigger: "axis" // item值：鼠标移动到对应的形状上才会出现提示
+      },
+      // 工具栏，注意需要指定feature否则不显示
+      toolbox: {
+        show: true,
+        feature: {
+          //数据视图 - 将各种数据图变成数据表
+          dataView: {
+            // 控制是否显示
+            show: true,
+            // 控制只读属性
+            readOnly: true
+          },
+          // 将图表转化成为本地图片
+          saveAsImage: {
+            show: true
+          },
+          // 动态图标切换
+          magicType: {
+            show: true,
+            //type属性：需要切换成为的目标图表类型
+            type: ['bar', 'line', 'stack', 'tiled']
+          },
+          // 还原 - 跟动态图标联合使用
+          restore: {
+            show: true
+          }
+        }
+      },
+      // 图例
+      legend: {
+        show: true,
+        // 图例的标签  - 和series当中的元素的name属性对应的，可以少写，但是不能写错
+        data: ['销量', '产量']
+      },
+      // 横坐标轴 直角坐标系 grid 中的 x 轴
+      xAxis: {
+        show: true,
+        name: 'x轴',
+        type: 'category', //表明当前坐标轴的类型  默认横坐标轴就是类目,适用于离散的类目数据
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      },
+      // 纵坐标轴
+      yAxis: {
+        type: 'value', //表明当前坐标轴的类型，纵坐标轴的默认类型是 值
+        name: 'y轴'
+      },
+      // 序列/系列 每有一个对象，则在此图表中多一个折线图、条形图。。。
+      series: [
+        {
+          name: '销量', // 当前数据的名称
+          type: 'bar', // 当前数据的展现形式 bar 柱形图 line 折线图 etc.
+          // 系列中的数据内容数组。数组项通常为具体的数据项。注意，如果系列没有指定 data，并且 option 有 dataset，
+          // 那么默认使用第一个 dataset。如果指定了 data，则不会再使用 dataset。
+          // 可以使用 series.datasetIndex 指定其他的 dataset。
+          data: [5, 20, 36, 10, 10, 20] // 需要展示的数据
+        },
+        {
+          name: '产量',
+          type: 'line',
+          data: [5, 23, 23, 20, 34, 40]
+        }
+      ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  </script>
+</body>
+
+</html>
